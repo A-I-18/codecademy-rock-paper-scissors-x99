@@ -88,6 +88,13 @@ function getRoundWinner(roundNumber) {
             playerTwoMoveType = playerTwoMoveThreeType;
             playerTwoMoveValue = playerTwoMoveThreeValue;
             break;
+        default:
+            return null;
+    }
+
+    if (!isValidMoveType(playerOneMoveType) || !isValidMoveType(playerTwoMoveType) 
+        || !isValidMoveValue(playerOneMoveValue) || !isValidMoveValue(playerTwoMoveValue)) {
+        return null;
     }
 
     if (playerOneMoveType === playerTwoMoveType) {
