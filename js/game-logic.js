@@ -92,7 +92,7 @@ function getRoundWinner(roundNumber) {
             return null;
     }
 
-    if (!isValidMoveType(playerOneMoveType) || !isValidMoveType(playerTwoMoveType) 
+    if (!isValidMoveType(playerOneMoveType) || !isValidMoveType(playerTwoMoveType)
         || !isValidMoveValue(playerOneMoveValue) || !isValidMoveValue(playerTwoMoveValue)) {
         return null;
     }
@@ -120,7 +120,6 @@ function getRoundWinner(roundNumber) {
             } else {
                 return 'Player Two';
             }
-            break;
         case 'scissors':
             if (playerTwoMoveType === 'paper') {
                 return 'Player One';
@@ -129,4 +128,32 @@ function getRoundWinner(roundNumber) {
             }
     }
 
+}
+
+function countSubstringOccurrences(mainString, subString) {
+    if (subString.length === 0) {
+        return 0; // Avoid infinite loops or unexpected results for empty substring
+    }
+    return mainString.split(subString).length - 1;
+}
+
+function getGameWinner() {
+    let playerOneScore = 0;
+    let playerTwoScore = 0;
+    let roundWinners;
+
+    roundWinners = getRoundWinner(1);
+    roundWinners = roundWinners.concat(',', getRoundWinner(2));
+    roundWinners = roundWinners.concat(',', getRoundWinner(3));
+
+    playerOneScore = countSubstringOccurrences(roundWinners, 'Player One');
+    playerTwoScore = countSubstringOccurrences(roundWinners, 'Player Two');
+
+    if (playerOneScore > playerTwoScore) {
+        return 'Player One';
+    } else if (playerTwoScore > playerOneScore) {
+        return 'Player Two';
+    } else {
+        return 'Tie';
+    }
 }
