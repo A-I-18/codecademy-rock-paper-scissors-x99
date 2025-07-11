@@ -140,11 +140,25 @@ function countSubstringOccurrences(mainString, subString) {
 function getGameWinner() {
     let playerOneScore = 0;
     let playerTwoScore = 0;
-    let roundWinners;
+    let roundWinner, roundWinners;
 
-    roundWinners = getRoundWinner(1);
-    roundWinners = roundWinners.concat(',', getRoundWinner(2));
-    roundWinners = roundWinners.concat(',', getRoundWinner(3));
+    roundWinner = getRoundWinner(1);
+    if (roundWinner === null) {
+        return null;
+    }
+    roundWinners = roundWinner;
+
+    roundWinner = getRoundWinner(2);
+    if (roundWinner === null) {
+        return null;
+    }
+    roundWinners = roundWinners.concat(',', roundWinner);
+
+    roundWinner = getRoundWinner(3);
+    if (roundWinner === null) {
+        return null;
+    }
+    roundWinners = roundWinners.concat(',', roundWinner);
 
     playerOneScore = countSubstringOccurrences(roundWinners, 'Player One');
     playerTwoScore = countSubstringOccurrences(roundWinners, 'Player Two');
