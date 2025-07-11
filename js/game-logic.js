@@ -14,7 +14,7 @@ function isValidMoveType(moveType) {
     if (moveType !== 'rock' && moveType !== 'paper' && moveType !== 'scissors') {
         return false;
     }
-    
+
     return true;
 }
 
@@ -44,7 +44,7 @@ function setPlayerMoves(player, moveOneType, moveOneValue, moveTwoType, moveTwoV
     if (moveOneValue + moveTwoValue + moveThreeValue > 99) {
         return;
     }
-    
+
     if (player === 'Player One') {
         playerOneMoveOneType = moveOneType;
         playerOneMoveTwoType = moveTwoType;
@@ -62,4 +62,64 @@ function setPlayerMoves(player, moveOneType, moveOneValue, moveTwoType, moveTwoV
         playerTwoMoveTwoValue = moveTwoValue;
         playerTwoMoveThreeValue = moveThreeValue;
     }
+
+}
+
+function getRoundWinner(roundNumber) {
+    let playerOneMoveType, playerOneMoveValue;
+    let playerTwoMoveType, playerTwoMoveValue;
+
+    switch (roundNumber) {
+        case 1:
+            playerOneMoveType = playerOneMoveOneType;
+            playerOneMoveValue = playerOneMoveOneValue;
+            playerTwoMoveType = playerTwoMoveOneType;
+            playerTwoMoveValue = playerTwoMoveOneValue;
+            break;
+        case 2:
+            playerOneMoveType = playerOneMoveTwoType;
+            playerOneMoveValue = playerOneMoveTwoValue;
+            playerTwoMoveType = playerTwoMoveTwoType;
+            playerTwoMoveValue = playerTwoMoveTwoValue;
+            break;
+        case 3:
+            playerOneMoveType = playerOneMoveThreeType;
+            playerOneMoveValue = playerOneMoveThreeValue;
+            playerTwoMoveType = playerTwoMoveThreeType;
+            playerTwoMoveValue = playerTwoMoveThreeValue;
+            break;
+    }
+
+    if (playerOneMoveType === playerTwoMoveType) {
+        if (playerOneMoveValue > playerTwoMoveValue) {
+            return 'Player One';
+        } else if (playerOneMoveValue < playerTwoMoveValue) {
+            return 'Player Two';
+        } else {
+            return 'Tie';
+        }
+    }
+
+    switch (playerOneMoveType) {
+        case 'rock':
+            if (playerTwoMoveType === 'scissors') {
+                return 'Player One';
+            } else {
+                return 'Player Two';
+            }
+        case 'paper':
+            if (playerTwoMoveType === 'rock') {
+                return 'Player One';
+            } else {
+                return 'Player Two';
+            }
+            break;
+        case 'scissors':
+            if (playerTwoMoveType === 'paper') {
+                return 'Player One';
+            } else {
+                return 'Player Two';
+            }
+    }
+
 }
