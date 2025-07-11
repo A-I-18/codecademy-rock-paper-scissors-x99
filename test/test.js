@@ -1,9 +1,10 @@
 var fs = require('fs');
 var vm = require('vm');
-var path = 'js/game-logic.js';
+var pathModule = require('path');
+var path = pathModule.join(__dirname, '..', 'js', 'game-logic.js');
 
 var code = fs.readFileSync(path);
-vm.runInThisContext(code);
+vm.runInThisContext(code, { filename: path });
 
 var should = require('chai').should();
 
