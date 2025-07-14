@@ -62,7 +62,38 @@ function setPlayerMoves(player, moveOneType, moveOneValue, moveTwoType, moveTwoV
         playerTwoMoveTwoValue = moveTwoValue;
         playerTwoMoveThreeValue = moveThreeValue;
     }
+}
 
+function selectRandomMoveType(randomNumber) {
+    switch(randomNumber) {
+        case 0:
+          return 'rock';
+        case 1:
+          return 'paper';
+        case 2:
+          return 'scissors';
+      }
+}
+
+function selectRandomMoveValue(range) {
+    return Math.floor(Math.random() * range) + 1;
+}
+
+function setComputerMoves() {
+    let randomNumber;
+    
+    randomNumber = Math.floor(Math.random() * 3);
+    playerTwoMoveOneType = selectRandomMoveType(randomNumber);
+
+    randomNumber = Math.floor(Math.random() * 3);
+    playerTwoMoveTwoType = selectRandomMoveType(randomNumber);
+
+    randomNumber = Math.floor(Math.random() * 3);
+    playerTwoMoveThreeType = selectRandomMoveType(randomNumber);
+
+    playerTwoMoveOneValue = selectRandomMoveValue(97); // to ensure you have enough room for the other two numbers
+    playerTwoMoveTwoValue = selectRandomMoveValue(98 - playerTwoMoveOneValue); // to ensure you have enough room for the other number
+    playerTwoMoveThreeValue = 99 - playerTwoMoveOneValue - playerTwoMoveTwoValue;
 }
 
 function getRoundWinner(roundNumber) {
